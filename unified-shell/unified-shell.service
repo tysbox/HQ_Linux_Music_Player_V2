@@ -1,0 +1,23 @@
+[Unit]
+Description=HQ Linux Music Player — Unified Shell (port 3002)
+After=network.target hq-api.service
+Wants=hq-api.service
+
+[Service]
+Type=simple
+User=tysbox
+Group=tysbox
+WorkingDirectory=/home/tysbox/HQ_Linux_Music_Player_v2-/unified-shell
+Environment=NODE_ENV=production
+Environment=PORT=3002
+Environment=HOSTNAME=0.0.0.0
+ExecStartPre=/bin/sh -c 'mkdir -p /home/tysbox/HQ_Linux_Music_Player_v2-/unified-shell/.next/standalone/.next && rm -rf /home/tysbox/HQ_Linux_Music_Player_v2-/unified-shell/.next/standalone/.next/static && cp -r /home/tysbox/HQ_Linux_Music_Player_v2-/unified-shell/.next/static /home/tysbox/HQ_Linux_Music_Player_v2-/unified-shell/.next/standalone/.next/ 2>/dev/null || true; rm -rf /home/tysbox/HQ_Linux_Music_Player_v2-/unified-shell/.next/standalone/public && cp -r /home/tysbox/HQ_Linux_Music_Player_v2-/unified-shell/public /home/tysbox/HQ_Linux_Music_Player_v2-/unified-shell/.next/standalone/ 2>/dev/null || true'
+ExecStart=/usr/bin/node /home/tysbox/HQ_Linux_Music_Player_v2-/unified-shell/.next/standalone/server.js
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=unified-shell
+
+[Install]
+WantedBy=multi-user.target

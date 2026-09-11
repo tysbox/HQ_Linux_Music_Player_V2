@@ -8,3 +8,4 @@ venv/
 .next/
 unified-shell/node_modules/
 *.tsbuildinfo
+.git.bak.*/

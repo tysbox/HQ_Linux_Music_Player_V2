@@ -8,11 +8,10 @@ Requires=mpd.service
 Type=simple
 User=tysbox
 Group=tysbox
-WorkingDirectory=/home/tysbox/HQ_Linux_Music_Player
-# 旧 DSP/DMP と同じ PYTHONPATH（dmp/backend も解決するため）
-Environment="PYTHONPATH=/home/tysbox/HQ_Linux_Music_Player:/home/tysbox/HQ_Linux_Music_Player/dmp/backend"
+WorkingDirectory=/home/tysbox/HQ_Linux_Music_Player_v2-
+Environment="PYTHONPATH=/home/tysbox/HQ_Linux_Music_Player_v2-:/home/tysbox/HQ_Linux_Music_Player_v2-/dmp/backend"
 Environment="HQ_API_PORT=8002"
-ExecStart=/home/tysbox/HQ_Linux_Music_Player/backend/venv/bin/python3 -m uvicorn hq_api.main:app --host 0.0.0.0 --port 8002 --log-level info
+ExecStart=/home/tysbox/HQ_Linux_Music_Player_v2-/.venv/bin/python -m uvicorn hq_api.main:app --host 0.0.0.0 --port 8002 --log-level info
 Restart=on-failure
 RestartSec=5
 StandardOutput=journal
