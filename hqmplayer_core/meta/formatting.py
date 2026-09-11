@@ -85,6 +85,7 @@ def format_now_playing(status: dict, song: dict, *, apply_meta_cache: bool = Tru
         "artist": _clean_artist(artist),
         "album": album,
         "file": file_url,
+        "artwork_url": song.get("artwork_url"),
         "state": status.get("state", "stop"),
         "audio": status.get("audio", ""),
         "elapsed": float(status.get("elapsed", 0) or 0),

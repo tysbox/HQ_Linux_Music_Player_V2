@@ -33,7 +33,7 @@ router = APIRouter()
 PRESETS_PATH = os.path.expanduser("~/.config/audiophile/presets.json")
 LAST_CONFIG_PATH = os.path.expanduser("~/.config/audiophile/last_config.json")
 SWITCH_AUDIO_SCRIPT = os.path.expanduser(
-    "/home/tysbox/HQ_Linux_Music_Player/backend/scripts/switch_audio.sh"
+    "/home/tysbox/HQ_Linux_Music_Player_v2-/backend/scripts/switch_audio.sh"
 )
 
 

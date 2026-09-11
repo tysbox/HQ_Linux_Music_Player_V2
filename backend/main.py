@@ -519,7 +519,7 @@ def generate_camilladsp_yaml(config: AudioConfig) -> str:
     capture_samplerate = 192000
     if capture_samplerate != samplerate:
         devices_block["capture_samplerate"] = capture_samplerate
-        devices_block["resampler"] = {"type": "AsyncPoly", "interpolation": "Cubic"}
+        devices_block["resampler"] = {"type": "AsyncSinc", "profile": "Balanced"}
 
     y = {"devices": devices_block, "filters": {}, "pipeline": [], "mixers": {}}
 
@@ -642,8 +642,10 @@ def generate_camilladsp_yaml(config: AudioConfig) -> str:
 
     # ─────────────────────────────────────────────────────────────────────
     # MIXER: Recombine DRY (ch 0-1) + WET (ch 2-3) back to output (ch 0-1)
+    # has_reverb は IR 失敗時に config.reverb="none" に書き換わるため再評価する
     # ─────────────────────────────────────────────────────────────────────
-    if has_reverb:
+    has_reverb_effective = has_reverb and config.reverb != "none"
+    if has_reverb_effective:
         y["mixers"]["mix"] = {
             "channels": {"in": 4, "out": 2},
             "mapping": [
